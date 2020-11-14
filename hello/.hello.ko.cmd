@@ -1,0 +1,1 @@
+cmd_/home/yangj/Documents/project/mastering/study-ldd3/hello/hello.ko := ld -r -m elf_x86_64  -z max-page-size=0x200000  --build-id  -T ./scripts/module-common.lds -o /home/yangj/Documents/project/mastering/study-ldd3/hello/hello.ko /home/yangj/Documents/project/mastering/study-ldd3/hello/hello.o /home/yangj/Documents/project/mastering/study-ldd3/hello/hello.mod.o;  true

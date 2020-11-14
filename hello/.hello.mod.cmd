@@ -1,0 +1,1 @@
+cmd_/home/yangj/Documents/project/mastering/study-ldd3/hello/hello.mod := { echo  /home/yangj/Documents/project/mastering/study-ldd3/hello/hello.o; echo; } > /home/yangj/Documents/project/mastering/study-ldd3/hello/hello.mod

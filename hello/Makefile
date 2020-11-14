@@ -18,8 +18,8 @@ clean:
 .PHONY: modules modules_install clean
 
 else
-	# called from kernel build system : just decare what our modules are
-obj-m:= hello.o
+# called from kernel build system : just decare what our modules are
+obj-m:= hello.o hellop.o
 
 endif
 

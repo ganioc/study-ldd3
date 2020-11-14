@@ -1,0 +1,1 @@
+cmd_/home/yangj/Documents/project/mastering/study-ldd3/hello/hellop.ko := ld -r -m elf_x86_64  -z max-page-size=0x200000  --build-id  -T ./scripts/module-common.lds -o /home/yangj/Documents/project/mastering/study-ldd3/hello/hellop.ko /home/yangj/Documents/project/mastering/study-ldd3/hello/hellop.o /home/yangj/Documents/project/mastering/study-ldd3/hello/hellop.mod.o;  true
