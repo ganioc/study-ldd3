@@ -12,6 +12,7 @@ module_param(whom, charp, S_IRUGO);
 
 static int hello_init(void){
   int i;
+  int j;
   for(i=0; i< howmany; i++){
     printk(KERN_ALERT "(%d) Hello, %s\n", i, whom);
   }
