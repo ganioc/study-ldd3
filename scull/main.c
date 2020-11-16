@@ -15,7 +15,7 @@
 #include <linux/proc_fs.h>
 #include <linux/fcntl.h>  /* O_ACCMODE */
 #include <linux/seq_file.h>
-#include <linux/cdev.h>
+ #include <linux/cdev.h>
 
 #include <linux/uaccess.h>  /* copy_*_user */
 
@@ -26,5 +26,5 @@
 /*
  *  Our parameters which can be set at load time.
  */
-
+# major
 int scull_major = SCULL_MAJOR;
