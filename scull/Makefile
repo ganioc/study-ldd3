@@ -13,7 +13,7 @@ LDDING=$(PWD)/../include
 EXTRA_CFLAGS += $(DEBFLAGS)
 EXTRA_CFLAGS += -I$(LDDING)
 
-ifneq($(KERNELRELEASE),)
+ifneq ($(KERNELRELEASE),)
 # call from kernel build system
 scull-objs := main.o pipe.o access.o
 
