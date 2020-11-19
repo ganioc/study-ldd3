@@ -1,0 +1,39 @@
+#!/bin/bash
+# Sample init scripts for the scull driver module <yango3>
+
+DEVICE="scull"
+SECTION="misc"
+
+# The list of filename and minor numbers: $PREFIX is prefixed to all names
+PREFIX="scull"
+FILES="      0 0        1 1      2 2      3 3      priv 16
+	     pipe0 32 pipe1 33 pipe2 34 pipe3 35
+	     single 48 uid 64  wuid 80"
+INSMOD=/sbin/insmod; # use /sbin/modprobe if you prefer
+
+function device_specific_post_load () {
+    true; # fill at will
+}
+function device_specific_pre_unload() {
+    true; # fill at will
+}
+
+# Everything below this line should work unchanged for any char device.
+# Obviously, however, no options on the command line: either in
+# /etc/${DEVICE}.conf or /etc/modules.conf (if modprobe is used)
+
+# Optional configuration file: format is
+#     owner <ownername>
+#     group <groupname>
+#     mode  <modename>
+#     options <insmod options>
+CFG=/etc/${DEVICE}.conf
+
+# kernel version, used to look for modules
+KERNEL=`uname -r`
+
+#FIXME: it looks like there is no misc section. Where should it be?
+MODDIR="/lib/modules/${KERNEL}/kernel/drivers/${SECTION}"
+if [ ! -d $MODDIR ]; then MODDIR="/lib/modules/${KERNEL}/${SECTION}";fi
+
+# Root or die
