@@ -264,7 +264,7 @@ static int scull_read_p_mem(struct seq_file *s, void *v){
 static int scullpipe_proc_open(struct inode *inode, struct file *file){
 	return single_open(file, scull_read_p_mem, NULL);
 }
-static struct file_operations scullpipe_proc_ops = {
+emstatic struct file_operations scullpipe_proc_ops = {
 	.owner = THIS_MODULE,
 	.open  = scullpipe_proc_open,
 	.read  = seq_read,

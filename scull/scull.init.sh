@@ -76,7 +76,7 @@ function remove_files (){
     local devlist=""
     local file
     while true; do
-	if [ $# -lt 2]; then break; fi;
+	if [ $# -lt 2 ]; then break; fi;
 	file="${DEVICE}$1"
 	devlist="$devlist $file"
 	shift 2
