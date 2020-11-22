@@ -291,13 +291,14 @@ static struct scull_adev_info {
 	{ "sculluid", &scull_u_device, &scull_user_fops },
 	{ "scullwuid", &scull_w_device, &scull_wusr_fops },
 	{ "scullpriv", &scull_c_device, &scull_priv_fops }
-}
+};
 
 #define SCULL_N_ADEVS   4
 
 /*
  * Set up a single device.
  */
+
 static void scull_access_setup( dev_t devno, struct scull_adev_info *devinfo){
 	struct scull_dev *dev = devinfo->sculldev;
 	int err;
@@ -350,7 +351,7 @@ void scull_access_cleanup(void){
 	for (i=0; i< SCULL_N_ADEVS; i++){
 		struct scull_dev *dev = scull_access_devs[i].sculldev;
 		cdev_del(&dev->cdev);
-	scull_trim(scull_access_devs[i].sculldev):
+		scull_trim(scull_access_devs[i].sculldev);
 	}
 	/* And all the cloned devices */
 	list_for_each_entry_safe(lptr, next, &scull_c_list, list){

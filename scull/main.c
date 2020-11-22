@@ -15,7 +15,7 @@
 #include <linux/proc_fs.h>
 #include <linux/fcntl.h>  /* O_ACCMODE */
 #include <linux/seq_file.h>
- #include <linux/cdev.h>
+#include <linux/cdev.h>
 
 #include <linux/uaccess.h>  /* copy_*_user */
 
@@ -26,7 +26,6 @@
 /*
  *  Our parameters which can be set at load time.
  */
-# major
 int scull_major = SCULL_MAJOR;
 int scull_minor = 0;
 int scull_nr_devs = SCULL_NR_DEVS; /* number of bare scull devices */
@@ -92,7 +91,7 @@ int scull_read_procmem(struct seq_file *s, void *v){
 			if(qs->data && !qs->next) /* dump only the last item */
 				for(j=0; j<d->qset; j++){
 					if(qs->data[j])
-						seq_printf(s, " %4i: %ip\n",
+						seq_printf(s, " %4i: %8p\n",
 							   j,qs->data[j]);
 				}
 
@@ -102,8 +101,6 @@ int scull_read_procmem(struct seq_file *s, void *v){
 	return 0;
 }
 /*
- * Here are out sequence interation methods. Our "position" is
- * simply the device number.
  * Here are our sequence iteration methods. Our "position" is
  * simply the device number.
  */
@@ -267,7 +264,7 @@ ssize_t scull_read(struct file *filp, char __user *buf, size_t count, loff_t *f_
 	int item, s_pos, q_pos, rest;
 	ssize_t retval = 0;
 
-	if(mutex_ock_interruptible(&dev->lock))
+	if(mutex_lock_interruptible(&dev->lock))
 		return -ERESTARTSYS;
 	if(*f_pos >= dev->size)
 		goto out;
@@ -394,7 +391,7 @@ long scull_ioctl(struct file *filp, unsigned int cmd, unsigned long arg){
 			return -EPERM;
 		scull_quantum = arg;
 		break;
-	case SCULL_IOCQQUANTUM: /* Get: arg is pointer to result */
+	case SCULL_IOCGQUANTUM: /* Get: arg is pointer to result */
 		retval = __put_user(scull_quantum, (int __user *)arg);
 		break;
 	case SCULL_IOCQQUANTUM: /* Query: return it (it's positive) */
@@ -405,7 +402,7 @@ long scull_ioctl(struct file *filp, unsigned int cmd, unsigned long arg){
 		tmp = scull_quantum;
 		retval = __get_user(scull_quantum, (int __user *) arg);
 		if(retval == 0)
-			retval = __put_user()(tmp, (int __user*)arg);
+			retval = __put_user(tmp, (int __user*)arg);
 		break;
 	case SCULL_IOCHQUANTUM: /* sHift: like Tell + Query */
 		if(! capable(CAP_SYS_ADMIN))
@@ -593,4 +590,4 @@ fail:
 }
 
 module_init(scull_init_module);
-moudle_exit(scull_cleanup_module);
+module_exit(scull_cleanup_module);

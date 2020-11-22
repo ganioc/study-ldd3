@@ -2,6 +2,8 @@
 
 # Add your debugging flag to CFLAGS
 
+DEBUG = y
+
 ifeq ($(DEBUG), y)
 	DEBFLAGS = -O -g -DSCULL_DEBUG
 else
